@@ -3,6 +3,7 @@ package com.example.sumweather.logic.network
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.await
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
@@ -29,4 +30,10 @@ object SunnyWeatherNetwork {
             })
         }
     }
+
+    private val weatherNetWork = ServiceCreator.create(WeatherService::class.java)
+
+    suspend fun getDailyWeather(lng:String,lat:String) = weatherNetWork.getDailyWeather(lng,lat).await()
+
+    suspend fun getRealtimeWeather(lng:String,lat:String) = weatherNetWork.getRealtimeWeather(lng,lat).await()
 }
