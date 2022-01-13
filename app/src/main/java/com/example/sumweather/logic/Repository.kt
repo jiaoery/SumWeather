@@ -1,6 +1,7 @@
 package com.example.sumweather.logic
 
 import androidx.lifecycle.liveData
+import com.example.sumweather.logic.dao.PlaceDao
 import com.example.sumweather.logic.model.Place
 import com.example.sumweather.logic.model.Weather
 import com.example.sumweather.logic.network.SunnyWeatherNetwork
@@ -52,4 +53,10 @@ object Repository {
             }
             emit(result)
         }
+
+    fun savePlace(place:Place)= PlaceDao.savePlace(place)
+
+    fun getSavedPlace() = PlaceDao.getSavedPlace()
+
+    fun isPlaceSaved() = PlaceDao.isPlaceSaved()
 }

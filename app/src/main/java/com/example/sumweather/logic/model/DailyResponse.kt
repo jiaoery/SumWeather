@@ -16,6 +16,6 @@ data class DailyResponse(val status: String, val result:Result){
                          val carWashing:List<LifeDescription>, val ultraviolet:List<LifeDescription>,
                          val dressing:List<LifeDescription>)
 
-    data class LifeDescription(val description:String)
+    data class LifeDescription(val desc:String)
 }
 
