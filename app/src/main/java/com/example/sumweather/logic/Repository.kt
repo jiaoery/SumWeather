@@ -33,7 +33,7 @@ object Repository {
                 val realTimeResponse = deferredRealtime.await()
                 val dailyResponse =deferredDaily.await()
                 if(realTimeResponse.status=="ok"&&dailyResponse.status == "ok"){
-                    val weather = Weather(realTimeResponse.result.realTime,dailyResponse.result.daily)
+                    val weather = Weather(realTimeResponse.result.realtime,dailyResponse.result.daily)
                     Result.success(weather)
                 }else{
                     Result.failure(

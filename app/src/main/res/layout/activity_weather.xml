@@ -44,9 +44,9 @@
         android:layout_gravity="start"
         android:clickable="true"
         android:focusable="true"
-        android:background="@color/colorPrimary">
+        android:background="@color/purple_500">
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/placeFragment"
             android:name="com.example.sumweather.ui.place.PlaceFragment"
             android:layout_width="match_parent"

@@ -8,7 +8,7 @@ class SunnyWeatherApplication:Application() {
     companion object {
         lateinit var context: Context
         //获取到的令牌token
-        const val TOKEN = ""
+        const val TOKEN = "P3c4Ku50Mx01JEcx"
     }
 
     override fun onCreate() {

@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import com.example.sumweather.R
@@ -55,20 +56,21 @@ class WeatherActivity : AppCompatActivity() {
                 Toast.makeText(this,"无法成功获取天气信息",Toast.LENGTH_SHORT).show()
                 result.exceptionOrNull()?.printStackTrace()
             }
-            binding.swipeRefresh.isRefreshing = true
+            binding.swipeRefresh.isRefreshing = false
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            binding.swipeRefresh.setColorSchemeColors(getColor(R.color.colorPrimary))
+            binding.swipeRefresh.setColorSchemeColors(getColor(R.color.purple_500))
         }else{
-            binding.swipeRefresh.setColorSchemeColors(R.color.colorPrimary)
+            binding.swipeRefresh.setColorSchemeColors(R.color.purple_500)
         }
+
         refreshWeather()
         binding.swipeRefresh.setOnRefreshListener {
             refreshWeather()
         }
 
         binding.llNow.navBtn.setOnClickListener {
-            binding.drawerLayout
+            binding.drawerLayout.openDrawer(GravityCompat.START)
         }
         binding.drawerLayout.addDrawerListener(object: DrawerLayout.DrawerListener{
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
@@ -92,7 +94,7 @@ class WeatherActivity : AppCompatActivity() {
     }
 
 
-    fun showWeatherInfo(weather: Weather){
+    private fun showWeatherInfo(weather: Weather){
         binding.llNow.placeName.text = viewModel.placeName
         val realTime = weather.realtime
         val daily = weather.daily
@@ -110,9 +112,9 @@ class WeatherActivity : AppCompatActivity() {
         for (i in 0 until days){
             val skycon = daily.skycon[i]
             val temperature = daily.temperature[i]
-            val view = ForecastItemBinding.inflate(layoutInflater);
+            val view = ForecastItemBinding.inflate(layoutInflater,binding.llForecast.root,false);
             val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            view.dateInfo.text = simpleDateFormat.format(temperature)
+            view.dateInfo.text = simpleDateFormat.format(skycon.date)
             val sky = getSky(skycon.value)
             view.skyIcon.setImageResource(sky.icon)
             view.skyInfo.text = sky.info
